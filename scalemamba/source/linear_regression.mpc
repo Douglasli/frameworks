@@ -1,0 +1,29 @@
+aaaas = sint.Array(10)
+bbbbs = sint.Array(10)
+
+for i in range(10):
+  aaaas[i] = sint.get_private_input_from(0)
+  bbbbs[i] = sint.get_private_input_from(1)
+
+
+sum_x = sint(0)
+sum_y = sint(0)
+sum_xx = sint(0)
+sum_yx = sint(0)
+for i in range(10):
+    sum_x = sum_x+aaaas[i]
+    sum_y = sum_y+bbbbs[i]
+    sum_xx = sum_xx+aaaas[i]*aaaas[i]
+    sum_yx = sum_xx+bbbbs[i]*aaaas[i]
+
+x_mean = sum_x/10
+y_mean = sum_y/10
+
+ss_xy = sum_yx-10*x_mean*y_mean
+ss_xx = sum_xx-10*x_mean*x_mean
+
+phi_1 = ss_xy/ss_xx
+phi_0 = y_mean-phi_1*x_mean
+
+print_ln("phi_1: %s", phi_1.reveal())
+print_ln("phi_0: %s", phi_0.reveal())
