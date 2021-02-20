@@ -1,18 +1,17 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 WORKDIR /root
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
+  build-essential \
   bzip2 \
   curl \
   doxygen \
-  g++ \
-  gcc \
+  g++-8 \
+  gcc-8 \
   git \
-  libcrypto++-dev \
   libgmp3-dev \
-  libssl-dev \
   m4 \
   make \
   patch \
@@ -22,8 +21,14 @@ RUN apt-get update && apt-get install -y \
   yasm \
   zip
 
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
+
 ADD install_dependencies.sh .
 RUN ["bash", "install_dependencies.sh"]
+
+ADD bashrc .
+RUN cat bashrc >> /root/.bashrc
 
 ADD source/ /root/source
 ADD install.sh .

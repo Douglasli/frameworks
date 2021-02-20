@@ -1,10 +1,49 @@
+# this goes at the end of your $HOME/.bashrc file
 
-# download SCALE-MAMBA v1.5
+export mylocal="$HOME/local"
+
+# export OpenSSL paths
+
+export PATH="${mylocal}/openssl/bin/:${PATH}"
+
+export C_INCLUDE_PATH="${mylocal}/openssl/include/:${C_INCLUDE_PATH}"
+
+export CPLUS_INCLUDE_PATH="${mylocal}/openssl/include/:${CPLUS_INCLUDE_PATH}"
+
+export LIBRARY_PATH="${mylocal}/openssl/lib/:${LIBRARY_PATH}"
+
+export LD_LIBRARY_PATH="${mylocal}/openssl/lib/:${LD_LIBRARY_PATH}"
+
+# export MPIR paths
+
+export PATH="${mylocal}/mpir/bin/:${PATH}"
+
+export C_INCLUDE_PATH="${mylocal}/mpir/include/:${C_INCLUDE_PATH}"
+
+export CPLUS_INCLUDE_PATH="${mylocal}/mpir/include/:${CPLUS_INCLUDE_PATH}"
+
+export LIBRARY_PATH="${mylocal}/mpir/lib/:${LIBRARY_PATH}"
+
+export LD_LIBRARY_PATH="${mylocal}/mpir/lib/:${LD_LIBRARY_PATH}"
+
+# export Crypto++ paths
+
+export CPLUS_INCLUDE_PATH="${mylocal}/cryptopp/include/:${CPLUS_INCLUDE_PATH}"
+
+export LIBRARY_PATH="${mylocal}/cryptopp/lib/:${LIBRARY_PATH}"
+
+export LD_LIBRARY_PATH="${mylocal}/cryptopp/lib/:${LD_LIBRARY_PATH}"
+
+# download SCALE-MAMBA v1.11
 cd 
 git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
-git checkout -b v1.8.1 e3488e646ed71e8d3264e2f3fe8e2226d4d503a9
-cp /root/source/CONFIG.mine .
+git checkout -b v1.11 8123e690f622a79f6ed1199fe1be7db3cd23699a
+# cp /root/source/CONFIG.mine .
+cd $HOME/SCALE-MAMBA 
+cp CONFIG CONFIG.mine 
+echo "ROOT = $HOME/SCALE-MAMBA" >> CONFIG.mine 
+echo "OSSL = /root/local/openssl" >> CONFIG.mine
 make progs
 
 # set up certificate authority
@@ -30,7 +69,7 @@ done
 
 # copy examples to correct locations
 cd /root/SCALE-MAMBA
-for EX in mult3 innerprod xtabs
+for EX in mult3 innerprod xtabs linear_regression
 do
   mkdir Programs/$EX
   cp /root/source/$EX.mpc Programs/$EX/
