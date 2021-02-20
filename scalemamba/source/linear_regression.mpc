@@ -4,26 +4,38 @@ bbbbs = sint.Array(10)
 for i in range(10):
   aaaas[i] = sint.get_private_input_from(0)
   bbbbs[i] = sint.get_private_input_from(1)
+# aaaas = [sint(43),sint(72),sint(8),sint(21),sint(17),sint(4),sint(89),sint(29),sint(29),sint(5)]
+# bbbbs = [sint(25),sint(37),sint(9),sint(3),sint(57),sint(32),sint(14),sint(58),sint(6),sint(68)]
 
 
-sum_x = sint(0)
-sum_y = sint(0)
-sum_xx = sint(0)
-sum_yx = sint(0)
+sum_x = sfloat(0)
+sum_y = sfloat(0)
+sum_xx = sfloat(0)
+sum_yx = sfloat(0)
 for i in range(10):
     sum_x = sum_x+aaaas[i]
     sum_y = sum_y+bbbbs[i]
     sum_xx = sum_xx+aaaas[i]*aaaas[i]
-    sum_yx = sum_xx+bbbbs[i]*aaaas[i]
+    sum_yx = sum_yx+bbbbs[i]*aaaas[i]
 
-x_mean = sum_x/10
-y_mean = sum_y/10
+_mean = sum_x/sfloat(10)
+y_mean = sum_y/sfloat(10)
 
-ss_xy = sum_yx-10*x_mean*y_mean
-ss_xx = sum_xx-10*x_mean*x_mean
+
+ss_xy = sum_yx-sfloat(10)*x_mean*y_mean
+ss_xx = sum_xx-sfloat(10)*x_mean*x_mean
+
 
 phi_1 = ss_xy/ss_xx
 phi_0 = y_mean-phi_1*x_mean
 
+print_ln("sum_x: %s", sum_x.reveal())
+print_ln("sum_y: %s", sum_y.reveal())
+print_ln("sum_xx: %s", sum_xx.reveal())
+print_ln("sum_yx: %s", sum_yx.reveal())
+print_ln("x_mean: %s", x_mean.reveal())
+print_ln("y_mean: %s", y_mean.reveal())
+print_ln("ss_xy: %s", ss_xy.reveal())
+print_ln("ss_xx: %s", ss_xx.reveal())
 print_ln("phi_1: %s", phi_1.reveal())
 print_ln("phi_0: %s", phi_0.reveal())
