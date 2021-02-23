@@ -18,7 +18,7 @@ for i in range(10):
     sum_xx = sum_xx+aaaas[i]*aaaas[i]
     sum_yx = sum_yx+bbbbs[i]*aaaas[i]
 
-_mean = sum_x/sfloat(10)
+x_mean = sum_x/sfloat(10)
 y_mean = sum_y/sfloat(10)
 
 
