@@ -36,14 +36,13 @@ export LD_LIBRARY_PATH="${mylocal}/cryptopp/lib/:${LD_LIBRARY_PATH}"
 
 # download SCALE-MAMBA v1.11
 cd 
-git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
-git checkout -b v1.11 8123e690f622a79f6ed1199fe1be7db3cd23699a
 # cp /root/source/CONFIG.mine .
 cd $HOME/SCALE-MAMBA 
 cp CONFIG CONFIG.mine 
 echo "ROOT = $HOME/SCALE-MAMBA" >> CONFIG.mine 
 echo "OSSL = /root/local/openssl" >> CONFIG.mine
+rm rust-toolchain
 make progs
 
 # set up certificate authority
